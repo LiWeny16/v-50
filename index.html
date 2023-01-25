@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,7 +17,7 @@
     }
     function todayToThursday() {
       let formedThursday =
-        kit.getWeek() - 4 >= 0 ? 11 : 4
+        kit.getWeek() - 4 > 0 ? 11 : 4
       let waitDay = formedThursday - kit.getWeek();
       return waitDay;
     }
@@ -25,7 +25,7 @@
       findId("content").innerHTML = content();
       sleep(2000)
         .then(() => {
-          if (todayToThursday){
+          if (todayToThursday()){
             window.location = "https://www.bkchina.cn/";
           }
           else{
@@ -39,7 +39,7 @@
   </script>
   <style>
     #content{
-      font-size: 25vh;
+      font-size: 24vh;
       color: rgb(250, 18, 18);
     }
   </style>
