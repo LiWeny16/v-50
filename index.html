@@ -7,18 +7,40 @@
     <title>Document</title>
   </head>
   <body>
-<div>
-    明天星期四,V我50
-</div>
+    <div id="content"></div>
   </body>
-  <script src="https://cdn.jsdelivr.net/npm/bigonion-kit/umd/umd-kit.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bigonion-kit@0.9.5/umd/umd-kit.js"></script>
+  <script src="./src/js/main.js"></script>
   <script>
-    sleep(2000)
-      .then(() => {
-        window.location = "https://www.bkchina.cn/";
-      })
-      .catch((err) => {
-        log(err);
-      });
+    function content() {
+      return `今天星期${kit.getWeek()}<br>距离星期4还有<br>${todayToThursday()}天,V我${50/(todayToThursday()+1)}`;
+    }
+    function todayToThursday() {
+      let formedThursday =
+        kit.getWeek() - 4 >= 0 ? 11 : 4
+      let waitDay = formedThursday - kit.getWeek();
+      return waitDay;
+    }
+    (function () {
+      findId("content").innerHTML = content();
+      sleep(2000)
+        .then(() => {
+          if (todayToThursday){
+            window.location = "https://www.bkchina.cn/";
+          }
+          else{
+            window.location = "https://www.kfchk.com/index.html"
+          }
+        })
+        .catch((err) => {
+          log(err);
+        });
+    })();
   </script>
+  <style>
+    #content{
+      font-size: 25vh;
+      color: rgb(250, 18, 18);
+    }
+  </style>
 </html>
